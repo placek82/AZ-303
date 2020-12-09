@@ -1,0 +1,7 @@
+Konwencja nazewnictwa:
+1. VNet: vnet-<environment>-<region>-<instance>, np. vnet-az-303-northeurope-01.
+2. Subnet: snet-<environment>-<purpose>-<instance>, np. snet-az-303-frontend-01.
+3. NSG: nsg-<environment>-<purpose>-<instance>, np. nsg-az-303-frontend-01.
+4. VM: vm-<purpose>-<instance>, np. vm-WebServer-01.
+5. Dysk: <VMName>-<diskType>, np. vm-WebServer-01-OSDisk.
+6. RG: rg-<subscription>-<instance>, np. rg-learn-01.

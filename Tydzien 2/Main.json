@@ -1,0 +1,207 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VNetTemplateUri" : {
+            "type": "string"
+        },
+        "VMTemplateUri" : {
+            "type": "string"
+        },
+        "EnvironmentName": {
+            "type" : "string",
+            "defaultValue": "env",
+            "minLength": 3,
+            "maxLength": 10
+        },
+        "VM1Name" : {
+            "type": "string"
+        },
+        "VM2Name" : {
+            "type": "string"
+        },
+        "KeyVaultName" : {
+            "type": "string"
+        },
+        "TenantId": {
+            "type": "string",
+            "defaultValue": "[subscription().tenantId]"
+        },
+        "AdUserId": {
+            "type": "string"
+        },
+        "VMUserNameSecret": {
+            "type": "securestring"
+        },
+        "VMUserPasswordSecret": {
+            "type": "securestring"
+        }
+    },
+    "functions": [],
+    "variables": {
+        "keyVaultId" : "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.KeyVault/vaults/', parameters('KeyVaultName'))]"
+    },
+    "resources": [
+        {
+            "name": "[parameters('KeyVaultName')]",
+            "type": "Microsoft.KeyVault/vaults",
+            "apiVersion": "2016-10-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "enabledForDeployment": true,
+                "enabledForTemplateDeployment": true,
+                "enabledForDiskEncryption": true,
+                "tenantId": "[parameters('TenantId')]",
+                "accessPolicies": [
+                    {
+                        "tenantId": "[parameters('TenantId')]",
+                        "objectId": "[parameters('AdUserId')]",
+                        "permissions": {
+                            "keys": [
+                                "Get"
+                            ],
+                            "secrets": [
+                                "List",
+                                "Get",
+                                "Set"
+                            ]
+                        }
+                    }
+                ],
+                "sku": {
+                    "name": "standard",
+                    "family": "A"
+                }
+            },
+            "resources": [
+                {
+                    "type": "secrets",
+                    "name": "VMUserName",
+                    "apiVersion": "2016-10-01",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.KeyVault/vaults', parameters('KeyVaultName'))]"
+                    ],
+                    "properties": {
+                        "value": "[parameters('VMUserNameSecret')]"
+                    }
+                },
+                {
+                    "type": "secrets",
+                    "name": "VMUserPassword",
+                    "apiVersion": "2016-10-01",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.KeyVault/vaults', parameters('KeyVaultName'))]"
+                    ],
+                    "properties": {
+                        "value": "[parameters('VMUserPasswordSecret')]"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "VNetDeployment",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[parameters('VNetTemplateUri')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "EnvironmentName" : {
+                        "value" : "[parameters('EnvironmentName')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('KeyVaultName'))]"
+            ]
+        },
+        {
+            "name": "VM1Deployment",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[parameters('VMTemplateUri')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "VNetName" : {
+                        "value" : "[reference('VNetDeployment').outputs.VNetName.value]"
+                    },
+                    "SubnetName" : {
+                        "value" : "[reference('VNetDeployment').outputs.Subnet1Name.value]"
+                    },
+                    "VMName" : {
+                        "value" : "[parameters('VM1Name')]"
+                    },
+                    "AdminName" : {
+                        "reference" : {
+                            "KeyVault" : {
+                                "id" : "[variables('keyVaultId')]"
+                            },
+                            "secretName" : "VMUserName"
+                        }
+                    },
+                    "AdminPassword" : {
+                        "reference" : {
+                            "KeyVault" : {
+                                "id" : "[variables('keyVaultId')]"
+                            },
+                            "secretName" : "VMUserPassword"
+                        }
+                    }
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', 'VNetDeployment')]"
+            ]
+        },
+        {
+            "name": "VM2Deployment",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[parameters('VMTemplateUri')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "VNetName" : {
+                        "value" : "[reference('VNetDeployment').outputs.VNetName.value]"
+                    },
+                    "SubnetName" : {
+                        "value" : "[reference('VNetDeployment').outputs.Subnet2Name.value]"
+                    },
+                    "VMName" : {
+                        "value" : "[parameters('VM2Name')]"
+                    },
+                    "AdminName" : {
+                        "reference" : {
+                            "KeyVault" : {
+                                "id" : "[variables('keyVaultId')]"
+                            },
+                            "secretName" : "VMUserName"
+                        }
+                    },
+                    "AdminPassword" : {
+                        "reference" : {
+                            "KeyVault" : {
+                                "id" : "[variables('keyVaultId')]"
+                            },
+                            "secretName" : "VMUserPassword"
+                        }
+                    }
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', 'VNetDeployment')]"
+            ]
+        }
+    ],
+    "outputs": {}
+}

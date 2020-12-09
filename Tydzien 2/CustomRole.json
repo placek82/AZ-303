@@ -1,0 +1,23 @@
+{
+    "properties": {
+        "roleName": "MyCustomRole",
+        "description": "Can start VM, stop VM and handle support requests. ",
+        "assignableScopes": [
+            "/subscriptions/xyz"
+        ],
+        "permissions": [
+            {
+                "actions": [
+                    "Microsoft.Authorization/*/read",
+                    "Microsoft.Resources/subscriptions/resourceGroups/read",
+                    "Microsoft.Support/*",
+                    "Microsoft.Compute/virtualMachines/start/action",
+                    "Microsoft.Compute/virtualMachines/powerOff/action"
+                ],
+                "notActions": [],
+                "dataActions": [],
+                "notDataActions": []
+            }
+        ]
+    }
+}
