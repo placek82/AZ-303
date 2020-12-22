@@ -30,8 +30,10 @@ To po kolei:
 3. Na początku czwartego roku usuwamy dane z pierwszego roku, czyli wracamy do poziomu 730 TB i codziennie dochodzi nam 1 TB - aż do 1095 TB na koniec roku i potem znowu spada do 730 TB.
 4. Do kosztów nie wliczam mechanizmu robienia backupów, a tylko koszt przechowywania danych.
 5. Wykres pokazujący ilość przechowywanych danych jest pokazany na poniższym obrazku. To, co nas interesuje, to pole pod krzywą.
-[img](Img/1.png)
+![](Img/1.png)
 6. Na wykresie są "zęby", ale można łatwo się ich pozbyć, bo wiemy, że dane przyrastają nam codziennie w takim samym tempie. Co więcej, nie interesuje nas narastający koszt, ale całkowity, więc te "zęby" można przenieść.
+![](Img/2.png)
 7. W rezultacie dostajemy prostą figurę z dwunastoma kwadracikami, z których każdy reprezentuje przechowywanie 365 TB danych przez rok.
+![](Img/3.png)
 8. Z kalkulatora Azure wychodzi, że roczny koszt trzymania 365 TB to 4440 USD, czyli całkowity koszty to 12 * 4440 USD = 53280 USD.
 
