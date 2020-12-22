@@ -35,5 +35,5 @@ To po kolei:
 ![](Img/2.png)
 7. W rezultacie dostajemy prostą figurę z dwunastoma kwadracikami, z których każdy reprezentuje przechowywanie 365 TB danych przez rok.
 ![](Img/3.png)
-8. Z kalkulatora Azure wychodzi, że roczny koszt trzymania 365 TB to 4440 USD, czyli całkowity koszty to 12 * 4440 USD = 53280 USD.
+8. Z kalkulatora Azure wychodzi, że roczny koszt trzymania 365 TB to 4440 USD, czyli całkowity koszt to 12 * 4440 USD = 53280 USD.
 
