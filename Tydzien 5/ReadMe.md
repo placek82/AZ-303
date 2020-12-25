@@ -1,4 +1,4 @@
-####Wynik próby:
+### Wynik próby:
 VMki w Hyper-V nie udało się utworzyć.
 
 Sprawdziłem jeszcze dwa scenariusze:
