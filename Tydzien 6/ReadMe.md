@@ -8,8 +8,8 @@ Grupa:
 Początkowo nie mogłem utworzyć dynamicznej grupy w AAD - chodziło o to, że żaden z moich użytkowników nie miał przypisanej licencji P1. Przy jej przypisywaniu okazało się, że użytkownik musi mieć wypełnione pole "Usage location", bo inaczej licencji nie da się przypisać.
 
 ### TYDZIEŃ7.2
-W AAD zarejestrowałem aplikację MySuperApp i podczas jej rejestracji został utworzony service principal, któremu można nadawać uprawnienia w różnych miejscach Azure'a poprzez przypisywanie ról (tak jak zwykłym użytkownikom).
-Do uwierzytelnianie mojego service principala będzie potrzebny tenant ID, application ID oraz client secret lub certyfikat. Skorzystałem z prostszego podejścia (client secret) i jego warto by było trzymać w Key Vaulcie.
+W AAD zarejestrowałem aplikację MySuperApp i podczas jej rejestracji został utworzony service principal, któremu można nadawać uprawnienia w różnych miejscach Azure'a poprzez przypisywanie ról (tak jak zwykłym użytkownikom).  
+Do uwierzytelniania mojego service principala będzie potrzebny tenant ID, application ID oraz client secret lub certyfikat. Skorzystałem z prostszego podejścia (client secret) i jego warto by było trzymać w Key Vaulcie.
 ![](Img/ClientSecret.png)  
 Fajne w service principalu jest to, że on jest powiązany z aplikacją i bez niej nie może istnieć.
 
