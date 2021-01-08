@@ -1,7 +1,7 @@
 ### TYDZIEŃ7.1
 1. Zrobiłem od zera Vmkę w Azure, na której potem doinstalowałem kontroler domeny.
 2. Zainstalowałem tam AD Connect z wymaganymi opcjami.  
-![](Img/AD2.png)
+![](Img/tst.png)
 3. W AD utworzyłem nowego użytkownika, który został przeniesiony do chmury.  
 ![](Img/AD1.png)
 
