@@ -23,10 +23,10 @@ Opis:
 Oprócz tego dorzucilem dwie tabele routingu, aby działał ruch między spoke'ami poprzez huba (bez bezpośredniego peeringu między spoke'ami).
 
 ## Zadanie 1.
-Testowane ścieżki ruchu zaznaczyłem czerwonymi strzałkami: 
+Testowane ścieżki ruchu zaznaczyłem czerwonymi strzałkami:  
 ![](Img/traffic.png)
 
-A) Test ruchu z SharedVM do VMFrontend1 (hub -> spoke1): 
+A) Test ruchu z SharedVM do VMFrontend1 (hub -> spoke1):  
 ![](Img/A.png)
 
 Oczywiście na dzień dobry nie mogłem pingać po nazwie maszynki (VMFrontend1), ale po dodaniu private DNS zone (ludwikowo.com) oraz podlinkowaniu tam Vnetów wszystko zagrało. 
