@@ -42,7 +42,7 @@ C) Test ruchu z VMFrontend2 do VMBackend1 (spoke1 -> spoke1):
 Z racji tego, że obie maszynki są w tym samym Vnecie, to pinganie po nazwach (bez domeny) działa z pudełka.
 
 D) Test ruchu z VMFrontend2 do VMSpoke2 (spoke1 -> spoke2 poprzez hub):
-Między tymi Vnetami nie ma bezpośredniego peeringu, więc na dzień dobry ruchu też nie będzie. Ale po dodaniu route'a przez firewall w hubie wszystko zagrało. Tutaj trochę się zamotałem, bo na początku zapomniałem dodać regułę w firewallu zezwalającą na ruch.
+Między tymi Vnetami nie ma bezpośredniego peeringu, więc na dzień dobry ruchu też nie będzie. Ale po dodaniu route'a przez firewall w hubie wszystko zagrało. Tutaj trochę się zamotałem, bo na początku zapomniałem dodać regułę w firewallu zezwalającą na ruch.  
 ![](Img/RouteTable.png) 
 ![](Img/D.png) 
 
