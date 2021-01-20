@@ -31,7 +31,7 @@ A) Test ruchu z SharedVM do VMFrontend1 (hub -> spoke1):
 
 Oczywiście na dzień dobry nie mogłem pingać po nazwie maszynki (VMFrontend1), ale po dodaniu private DNS zone (ludwikowo.com) oraz podlinkowaniu tam Vnetów wszystko zagrało. 
 ![](Img/A1.png)   
-![](Img/A2.png)
+![](Img/A2.png)  
 
 B) Test ruchu z VMFrontend2 do SharedVM (spoke1 -> hub):  
 ![](Img/B.png) 
@@ -47,9 +47,9 @@ Między tymi Vnetami nie ma bezpośredniego peeringu, więc na dzień dobry ruch
 ![](Img/D.png) 
 
 ## Zadanie 2:
-1. Zrobiłem dwa ASG: 
-    - Web-ASG - dla VMFrontend1 oraz VMFrontend2,
-    - SQL-ASG - dla VMBackend1 oraz VMBackend2.
+Zrobiłem dwa ASG: 
+  - Web-ASG - dla VMFrontend1 oraz VMFrontend2,
+  - SQL-ASG - dla VMBackend1 oraz VMBackend2.
 
 Założyłem trzy NSG:
   - dla Spoke1BackEndSubnet:  
