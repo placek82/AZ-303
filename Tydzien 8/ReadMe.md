@@ -8,15 +8,15 @@ Opis:
 1. To jest architektura typu hub & spoke i w moim przypadku zrobiłem dwa spoke'i, bo chciałem przetestować routowanie ruchu przez firewalla w hubie.
 2. Zakresy adresów IP starałem się dobrać w taki sposób, aby niepotrzebnie nie marnować puli adresów, ale też aby ich wystarczyło do wszystkich potrzeb.
 3. Cały hub znajduje się w sieci HubVNet. W jej skład wchodzą następujące podsieci:
-  - HubSubnet - tutaj mają być trzymane wszystkie zasoby współdzielone przez całą sieć.
-  - AzureFirewallSubnet - podsieć dla firewalla, który jest używany do filtrowania całego ruchu oraz do routowania między spoke'ami.
-  - GatewaySubnet - pusta podsieć, do której kiedyś może trafić VPN Gateway łączący się z siecią on-premises. Tą podsieć zrobiłem tylko po to, aby sprawdzić, czy starczy mi adresów.
-  - ManagementSubnet - podsieć dla Jumpboxa. Vmka w tej podsieci jest jedyną Vmką z publicznym IP; dostęp do wszystkich innych jest realizowany poprzez Jumpboxa.
+    - HubSubnet - tutaj mają być trzymane wszystkie zasoby współdzielone przez całą sieć.
+    - AzureFirewallSubnet - podsieć dla firewalla, który jest używany do filtrowania całego ruchu oraz do routowania między spoke'ami.
+    - GatewaySubnet - pusta podsieć, do której kiedyś może trafić VPN Gateway łączący się z siecią on-premises. Tą podsieć zrobiłem tylko po to, aby sprawdzić, czy starczy mi adresów.
+    - ManagementSubnet - podsieć dla Jumpboxa. Vmka w tej podsieci jest jedyną Vmką z publicznym IP; dostęp do wszystkich innych jest realizowany poprzez Jumpboxa.
 4. Drugą siecią jest Spoke1VNet. On ma dwie podsieci:
-  - Spoke1FrontEndSubnet - tutaj siedzą dwie Vmki, które udają serwery webowe. Na obrazku widać trochę wolnego miejsca i tam planowałem dodać application gateway'a, ale nic z tego nie wyszło.
-  - Spoke1BackendSubnet - tuaj siedzą dwie Vmki, które udają serwery bazodanowe. Tutaj tymczasowo dodałem internal load balancera, ale potem go usunąłem, bo miałem problemy z NSG, a już nie miałem siły dociekać źródła problemów.
+    - Spoke1FrontEndSubnet - tutaj siedzą dwie Vmki, które udają serwery webowe. Na obrazku widać trochę wolnego miejsca i tam planowałem dodać application gateway'a, ale nic z tego nie wyszło.
+    - Spoke1BackendSubnet - tuaj siedzą dwie Vmki, które udają serwery bazodanowe. Tutaj tymczasowo dodałem internal load balancera, ale potem go usunąłem, bo miałem problemy z NSG, a już nie miałem siły dociekać źródła problemów.
 5. Ostatnią siecią jest Spoke2VNet, który ma tylko jedną podsieć:
-  - Spoke2SubnetA - testowa sieć z jedną Vmką, która posłużyła mi do testowania routingu.
+    - Spoke2SubnetA - testowa sieć z jedną Vmką, która posłużyła mi do testowania routingu.
 6. Zrobiłem peering między hubem a dwoma spoke'ami.
 7. W sumie utworzyłem 7 Vmek i początkowo ustawiałem im zbyt duży rozmiar, przez co zabrakło mi CPU, bo dobiłem do limitu 20 CPU w regionie. W rezultacie musiałem zmniejszyć część maszynek z D4s_v3 do DS2_v2.
 8. Od siebie dodałem jeszcze private DNS zone, abym mógł pingać Vmki po nazwach.
@@ -48,8 +48,8 @@ Między tymi Vnetami nie ma bezpośredniego peeringu, więc na dzień dobry ruch
 
 ## Zadanie 2:
 1. Zrobiłem dwa ASG: 
-  - Web-ASG - dla VMFrontend1 oraz VMFrontend2,
-  - SQL-ASG - dla VMBackend1 oraz VMBackend2.
+    - Web-ASG - dla VMFrontend1 oraz VMFrontend2,
+    - SQL-ASG - dla VMBackend1 oraz VMBackend2.
 
 Założyłem trzy NSG:
   - dla Spoke1BackEndSubnet:  
