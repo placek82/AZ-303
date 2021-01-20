@@ -33,10 +33,10 @@ Oczywiście na dzień dobry nie mogłem pingać po nazwie maszynki (VMFrontend1)
 ![](Img/A1.png) 
 ![](Img/A2.png)
 
-B) Test ruchu z VMFrontend2 do SharedVM (spoke1 -> hub): 
+B) Test ruchu z VMFrontend2 do SharedVM (spoke1 -> hub):  
 ![](Img/B.png) 
 
-C) Test ruchu z VMFrontend2 do VMBackend1 (spoke1 -> spoke1): 
+C) Test ruchu z VMFrontend2 do VMBackend1 (spoke1 -> spoke1):  
 ![](Img/C.png) 
 
 Z racji tego, że obie maszynki są w tym samym Vnecie, to pinganie po nazwach (bez domeny) działa z pudełka.
@@ -71,13 +71,13 @@ Testy:
 Przed zebraniem danych usunąłem firewalla aby zmniejszyć koszty. Z tego samego powodu ruch zbierałem tylko przez kilka godzin, ale i tak trafiło mi się trochę strzałów rozpoznanych jako malicious (wszystkie waliły do Jumpboxa, bo to jedyna Vmka wystawiona na świat): 
 ![](Img/3.png)  
 
-Okazało się, że to USA mnie atakuje: 
+Okazało się, że to USA mnie atakuje:  
 ![](Img/USA.png)  
 
-Ale najwięcej zablokowanego ruchu szło z Bułgarii: 
+Ale najwięcej zablokowanego ruchu szło z Bułgarii:  
 ![](Img/Bulgaria.png)  
 
-Żaden ze spoke'ów nie odnotował ruchu przychodzącego, bo nie ma tam w ogóle dostępu ze świata, a ja sam nic już potem nie robiłem: 
+Żaden ze spoke'ów nie odnotował ruchu przychodzącego, bo nie ma tam w ogóle dostępu ze świata, a ja sam nic już potem nie robiłem:  
 ![](Img/incoming.png)  
 
 ## Końcowe uwagi:
